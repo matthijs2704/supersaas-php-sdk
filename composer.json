@@ -1,0 +1,30 @@
+{
+  "name": "supersaas/supersaas-php-sdk",
+  "version": "0.1.0",
+  "description": "Online appointment scheduler for any type of business. Flexible and affordable booking software that can be integrated into any site. Free basic version.",
+  "homepage": "https://www.supersaas.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Travis Dunn",
+      "email": "travis@supersaas.com"
+    }
+  ],
+  "keywords": [
+    "online appointment schedule", "booking calendar", "appointment book", "reservation system",
+    "scheduling software", "online booking system", "scheduling system"
+  ],
+  "require" : {
+    "php": ">=5.3",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^3.7 || ^4.8 || ^5.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "SuperSaaS": "src/"
+    }
+  }
+}
