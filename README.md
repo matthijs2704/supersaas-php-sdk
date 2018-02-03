@@ -14,5 +14,6 @@ Online bookings/appointments/calendars in PHP using the SuperSaaS scheduling pla
 + [Developer Documentation](https://www.supersaas.com/info/dev)
 + [Python SDK](https://github.com/TertiumQuid/supersaas-python-sdk)
 + [Ruby SDK](https://github.com/TertiumQuid/supersaas-ruby-sdk)
++ [NodeJS SDK](https://github.com/TertiumQuid/supersaas-nodejs-sdk)
 
 Contact: [support@supersaas.com](mailto:support@supersaas.com)
