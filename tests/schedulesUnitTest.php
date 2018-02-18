@@ -1,6 +1,6 @@
 <?php
 
-class FormsUnitTest extends PHPUnit_Framework_TestCase
+class SchedulesUnitTest extends PHPUnit_Framework_TestCase
 {
     protected $client;
 
@@ -16,11 +16,10 @@ class FormsUnitTest extends PHPUnit_Framework_TestCase
 
     public function testGetList()
     {
-        $from = date('Y-m-d H:i:s');
-        $this->assertNotNull($this->client->forms->getList(12345, $from));
+        $this->assertNotNull($this->client->schedules->getList());
     }
 
-    public function testGet() {
-        $this->assertNotNull($this->client->forms->get(12345));
+    public function testResources() {
+        $this->assertNotNull($this->client->schedules->resources(12345));
     }
 }

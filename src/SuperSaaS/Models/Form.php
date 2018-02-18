@@ -1,6 +1,6 @@
-<?php
+<?php namespace SuperSaaS\Models;
 
-class SuperSaaS_SDK_Models_Form extends SuperSaaS_SDK_Models_BaseModel
+class Form extends BaseModel
 {
     public $content;
     public $createdOn;
@@ -8,6 +8,8 @@ class SuperSaaS_SDK_Models_Form extends SuperSaaS_SDK_Models_BaseModel
     public $id;
     public $reservationProcessId;
     public $superFormId;
+    public $uniq;
+    public $updatedName;
     public $updatedOn;
     public $userId;
 
@@ -18,6 +20,8 @@ class SuperSaaS_SDK_Models_Form extends SuperSaaS_SDK_Models_BaseModel
         $this->id = $attributes['id'];
         $this->reservationProcessId = $attributes['reservation_process_id'];
         $this->superFormId = $attributes['super_form_id'];
+        $this->uniq = $attributes['uniq'];
+        $this->updatedName = $attributes['updated_name'];
         $this->updatedOn = $attributes['updated_on'];
         $this->userId = $attributes['user_id'];
 

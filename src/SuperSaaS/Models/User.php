@@ -1,6 +1,6 @@
-<?php
+<?php namespace SuperSaaS\Models;
 
-class SuperSaaS_SDK_Models_User extends SuperSaaS_SDK_Models_BaseModel
+class User extends BaseModel
 {
     public $address;
     public $country;
@@ -18,6 +18,9 @@ class SuperSaaS_SDK_Models_User extends SuperSaaS_SDK_Models_BaseModel
     public $role;
     public $superField;
 
+    /**
+     * @var \SuperSaaS\Models\Form
+     */
     public $form;
 
     public function __construct ($attributes=array()) {
@@ -40,7 +43,7 @@ class SuperSaaS_SDK_Models_User extends SuperSaaS_SDK_Models_BaseModel
         $this->errors = $attributes['errors'];
 
         if (!empty($attributes['form'])) {
-            $this->form = new SuperSaaS_SDK_Models_Form($attributes['form']);
+            $this->form = new Form($attributes['form']);
         }
     }
 }

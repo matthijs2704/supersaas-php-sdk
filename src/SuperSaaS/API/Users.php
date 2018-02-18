@@ -1,33 +1,36 @@
-<?php
+<?php namespace SuperSaaS\API;
 
-class SuperSaaS_SDK_API_Users extends SuperSaaS_SDK_API_BaseApi
+use SuperSaaS\Models;
+
+class Users extends BaseApi
 {
-    public function get($user_id=NULL, $form=NULL, $limit=NULL, $offset=NULL)
-    {
-        $path = $this->userPath($user_id);
-        if ($user_id) {
-            $res = $this->client->request('GET', $path);
-            return new SuperSaaS_SDK_Models_User($res);
-        } else {
-            $params = array(
-                'form' => empty($form) ? NULL : 'true',
-                'limit' => empty($limit) ? NULL : $this->validateNumber($limit),
-                'offset' => empty($offset) ? NULL : $this->validateNumber($offset)
-            );
-            $res = $this->client->request('GET', $path, $params);
-            $arr = array();
-            foreach ($res as $attributes) {
-                $arr[] = new SuperSaaS_SDK_Models_User($attributes);
-            }
-            return $arr;
+    public function getList($form=NULL, $limit=NULL, $offset=NULL) {
+        $path = $this->userPath();
+        $query = array(
+            'form' => empty($form) ? NULL : 'true',
+            'limit' => empty($limit) ? NULL : $this->validateNumber($limit),
+            'offset' => empty($offset) ? NULL : $this->validateNumber($offset)
+        );
+        $res = $this->client->get($path, $query);
+        $arr = array();
+        foreach ($res as $attributes) {
+            $arr[] = new Models\User($attributes);
         }
+        return $arr;
     }
 
-    public function create($attributes, $user_id=NULL)
+    public function get($user_id)
     {
         $path = $this->userPath($user_id);
+        $res = $this->client->get($path);
+        return new Models\User($res);
+    }
+
+    public function create($attributes, $user_id=NULL, $webhook=NULL)
+    {
+        $path = $this->userPath($user_id);
+        $query = array('webhook' => empty($webhook) ? NULL : 'true');
         $params = array(
-            'webhook' => $attributes['webhook'],
             'user' => array(
                 'name' => $this->validatePresent($attributes['name']),
                 'email' => $attributes['email'],
@@ -44,14 +47,14 @@ class SuperSaaS_SDK_API_Users extends SuperSaaS_SDK_API_BaseApi
                 'role' => isset($attributes['role']) ? $this->validateOptions($attributes['role'], array(3, 4, -1)) : NULL
             )
         );
-        $res = $this->client->request('POST', $path, $params);
-        return new SuperSaaS_SDK_Models_User($res);
+        $res = $this->client->post($path, $params, $query);
+        return new Models\User($res);
     }
 
     public function update($user_id, $attributes) {
         $path = $this->userPath($this->validateId($user_id));
+        $query = array('webhook' => empty($webhook) ? NULL : 'true');
         $params = array(
-            'webhook' => $attributes['webhook'],
             'user' => array(
                 'name' => $this->validatePresent($attributes['name']),
                 'email' => $attributes['email'],
@@ -68,21 +71,21 @@ class SuperSaaS_SDK_API_Users extends SuperSaaS_SDK_API_BaseApi
                 'role' => isset($attributes['role']) ? $this->validateOptions($attributes['role'], array(3, 4, -1)) : NULL
             )
         );
-        return $this->client->request('PUT', $path, $params);
+        return $this->client->put($path, $params, $query);
     }
 
     public function delete($user_id)
     {
         $path = $this->userPath($this->validateId($user_id));
-        return $this->client->request('DELETE', $path);
+        return $this->client->delete($path);
     }
 
-    private function userPath($id)
+    private function userPath($id=NULL)
     {
         if (empty($id)) {
-            return "/users.json";
+            return "/users";
         } else {
-            return "/users/" . $id . ".json";
+            return "/users/" . $id;
         }
     }
 }

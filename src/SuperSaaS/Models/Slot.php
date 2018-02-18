@@ -1,6 +1,6 @@
-<?php
+<?php namespace SuperSaaS\Models;
 
-class SuperSaaS_SDK_Models_Slot extends SuperSaaS_SDK_Models_BaseModel
+class Slot extends BaseModel
 {
     public $description;
     public $finish;
@@ -9,6 +9,9 @@ class SuperSaaS_SDK_Models_Slot extends SuperSaaS_SDK_Models_BaseModel
     public $start;
     public $title;
 
+    /**
+     * @var \SuperSaaS\Models\Appointment[]
+     */
     public $bookings;
 
     public function __construct ($attributes=array()) {
@@ -24,7 +27,7 @@ class SuperSaaS_SDK_Models_Slot extends SuperSaaS_SDK_Models_BaseModel
         if (!empty($attributes['bookings'])) {
             $this->bookings = array();
             foreach ($attributes['bookings'] as $booking) {
-                $this->bookings[] = new SuperSaaS_SDK_Models_Appointment($booking);
+                $this->bookings[] = new Appointment($booking);
             }
         }
     }

@@ -1,6 +1,6 @@
-<?php
+<?php namespace SuperSaaS\Models;
 
-class SuperSaaS_SDK_Models_Appointment extends SuperSaaS_SDK_Models_BaseModel
+class Appointment extends BaseModel
 {
     public $address;
     public $country;
@@ -14,6 +14,7 @@ class SuperSaaS_SDK_Models_Appointment extends SuperSaaS_SDK_Models_BaseModel
     public $field1R;
     public $field2R;
     public $finish;
+    public $formId;
     public $fullName;
     public $id;
     public $mobile;
@@ -36,7 +37,14 @@ class SuperSaaS_SDK_Models_Appointment extends SuperSaaS_SDK_Models_BaseModel
     public $userId;
     public $waitlisted;
 
+    /**
+     * @var \SuperSaaS\Models\Form
+     */
     public $form;
+
+    /**
+     * @var \SuperSaaS\Models\Slot
+     */
     public $slot;
 
     public function __construct ($attributes=array()) {
@@ -52,6 +60,7 @@ class SuperSaaS_SDK_Models_Appointment extends SuperSaaS_SDK_Models_BaseModel
         $this->field1R = $attributes['field_1_r'];
         $this->field2R = $attributes['field_2_r'];
         $this->finish = $attributes['finish'];
+        $this->formId = $attributes['form_id'];
         $this->fullName = $attributes['full_name'];
         $this->id = $attributes['id'];
         $this->mobile = $attributes['mobile'];
@@ -77,11 +86,11 @@ class SuperSaaS_SDK_Models_Appointment extends SuperSaaS_SDK_Models_BaseModel
         $this->errors = $attributes['errors'];
 
         if (!empty($attributes['form'])) {
-            $this->form = new SuperSaaS_SDK_Models_Form($attributes['form']);
+            $this->form = new Form($attributes['form']);
         }
 
         if (!empty($attributes['slot'])) {
-            $this->slot = new SuperSaaS_SDK_Models_Slot($attributes['slot']);
+            $this->slot = new Slot($attributes['slot']);
         }
     }
 }
